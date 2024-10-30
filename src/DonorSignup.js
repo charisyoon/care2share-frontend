@@ -19,13 +19,25 @@ function DonorSignup() {
 
   const testConnection = async () => {
     try {
-      // This is where you'll add your actual API call later
-      // const response = await fetch('your-donor-service-url/test');
-      // const data = await response.json();
       setTestMessage('Testing connection to donor service...');
-      // You can replace this with actual API integration later
+      
+      // Make API call
+      const response = await fetch('http://localhost:8001/');
+      
+      if (!response.ok) {
+        throw new Error('Network response error');
+      }
+      
+      // Parse JSON data
+      const data = await response.json();
+  
+      const message = data["\n\nmessage"] || 'Connected to donor service, but no message received';
+      console.log(message)
+      setTestMessage(message.trim());
+      
     } catch (error) {
       setTestMessage('Failed to connect to donor service');
+      console.error('Error connecting to donor service:', error);
     }
   };
 

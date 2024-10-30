@@ -2,28 +2,33 @@ import React, { useState } from 'react';
 import './FormStyles.css';
 
 function RecipientSignup() {
-  const [claimedSwipes, setClaimedSwipes] = useState(0);
+  const [claimedSwipes, setClaimedSwipes] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleClaim = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(`You have successfully claimed ${claimedSwipes} swipe(s)!`);
-    setClaimedSwipes(0); // Reset form after submission
+    setMessage(`Successfully claimed ${claimedSwipes} swipe(s)!`);
+    setClaimedSwipes('');
   };
 
   return (
     <div className="form-container">
-      <h2>Claim Donated Swipes</h2>
-      <form onSubmit={handleClaim}>
-        <input 
-          type="number" 
-          min="1" 
-          value={claimedSwipes} 
-          onChange={(e) => setClaimedSwipes(e.target.value)} 
-          placeholder="Enter number of swipes to claim"
-          required
-        />
-        <button type="submit">Claim</button>
-      </form>
+      <div className="form-card">
+        <h2 className="form-title">Claim Donated Swipes</h2>
+        <form onSubmit={handleSubmit} className="form-content">
+          <input
+            type="number"
+            min="1"
+            max="10"
+            placeholder="Enter number of swipes to claim"
+            value={claimedSwipes}
+            onChange={(e) => setClaimedSwipes(e.target.value)}
+            required
+          />
+          <button type="submit">Claim</button>
+          {message && <p className="success-message">{message}</p>}
+        </form>
+      </div>
     </div>
   );
 }

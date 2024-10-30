@@ -5,6 +5,14 @@ import './FormStyles.css';
 function LandingPage() {
   const navigate = useNavigate();
   
+  // Dummy data for the dashboard
+  const dashboardData = {
+    totalSwipes: 150, // Total meal plan swipes
+    remainingSwipes: 85, // Current remaining swipes
+    donatedSwipes: 0, // Number of swipes donated
+    receivedSwipes: 0, // Number of swipes received
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     navigate('/');
@@ -30,6 +38,63 @@ function LandingPage() {
           >
             Logout
           </button>
+        </div>
+
+        {/* Dashboard */}
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '0.5rem',
+          padding: '1.5rem',
+          marginBottom: '2rem',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+        }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>Your Meal Plan Dashboard</h2>
+          <div style={{ 
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '1rem'
+          }}>
+            {/* Dashboard Cards */}
+            <div style={{ 
+              padding: '1rem',
+              backgroundColor: '#f8fafc',
+              borderRadius: '0.375rem',
+              textAlign: 'center'
+            }}>
+              <p style={{ color: '#64748b', marginBottom: '0.5rem' }}>Total Meal Plan Swipes</p>
+              <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#334155' }}>{dashboardData.totalSwipes}</p>
+            </div>
+            
+            <div style={{ 
+              padding: '1rem',
+              backgroundColor: '#f0fdf4',
+              borderRadius: '0.375rem',
+              textAlign: 'center'
+            }}>
+              <p style={{ color: '#64748b', marginBottom: '0.5rem' }}>Remaining Swipes</p>
+              <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#166534' }}>{dashboardData.remainingSwipes}</p>
+            </div>
+
+            <div style={{ 
+              padding: '1rem',
+              backgroundColor: '#eff6ff',
+              borderRadius: '0.375rem',
+              textAlign: 'center'
+            }}>
+              <p style={{ color: '#64748b', marginBottom: '0.5rem' }}>Swipes Donated</p>
+              <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1e40af' }}>{dashboardData.donatedSwipes}</p>
+            </div>
+
+            <div style={{ 
+              padding: '1rem',
+              backgroundColor: '#fef2f2',
+              borderRadius: '0.375rem',
+              textAlign: 'center'
+            }}>
+              <p style={{ color: '#64748b', marginBottom: '0.5rem' }}>Swipes Received</p>
+              <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#991b1b' }}>{dashboardData.receivedSwipes}</p>
+            </div>
+          </div>
         </div>
 
         {/* Main Content */}
